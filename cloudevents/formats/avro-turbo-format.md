@@ -176,7 +176,7 @@ The following table shows exemplary mappings:
 | type        | string | `"com.example.someevent"`                      |
 | source      | string | `"/mycontext"`                                 |
 | id          | string | `"7a0dc520-c870-4193c8"`                       |
-| time        | log.   | `1234`                                         |
+| time        | long   | `1234`                                         |
 | dataschema  | string | `"http://registry.com/schema/v1/much.json"`    |
 | contenttype | string | `"application/json"`                           |
 | data        | bytes  | `"{"much":{"wow":"json"}}"`                    |
