@@ -5,7 +5,10 @@
 The Avro Format for CloudEvents defines how events attributes are expressed in
 the [Avro 1.9.0 Specification][avro-spec].
 
-This differs from the [Avro format](avro-formad.md) in that it optimized for performance.
+This differs from the [Avro format](avro-formad.md) in that:
+
+- It is optimized for performance, preferring a more compact representation.
+- Only supports spec version 1.0 (any changes to spec version, requires changes to Avro schema, which changes the finger-print).
 
 ## Table of Contents
 
