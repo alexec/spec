@@ -174,6 +174,7 @@ The following table shows exemplary mappings:
 | CloudEvents | Type   | Exemplary Avro Value                           |
 | ----------- | ------ | ---------------------------------------------- |
 | type        | string | `"com.example.someevent"`                      |
+| specversion | N/A    | Spec version is always `1.0`.                  |
 | source      | string | `"/mycontext"`                                 |
 | id          | string | `"7a0dc520-c870-4193c8"`                       |
 | time        | long   | `1234`                                         |
