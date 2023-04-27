@@ -1,9 +1,11 @@
-# Avro Event Format for CloudEvents - Version 1.0.3-wip
+# Avro Turbo Event Format for CloudEvents - Version 1.0.3-wip
 
 ## Abstract
 
 The Avro Format for CloudEvents defines how events attributes are expressed in
 the [Avro 1.9.0 Specification][avro-spec].
+
+This differs from the [Avro format](avro-formad.md) in that it optimized for performance.
 
 ## Table of Contents
 
@@ -52,7 +54,7 @@ The CloudEvents type system MUST be mapped to Avro types as follows.
 | Binary        | [bytes][avro-primitives]                                               |
 | URI           | [string][avro-primitives] following [RFC 3986 §4.3][rfc3986-section43] |
 | URI-reference | [string][avro-primitives] following [RFC 3986 §4.1][rfc3986-section41] |
-| Timestamp     | [string][avro-primitives] following [RFC 3339][rfc3339] (ISO 8601)     |
+| Timestamp     | [long][avro-primitives]                                                |
 
 Extension specifications MAY define secondary mapping rules for the values of
 attributes they define, but MUST also include the previously defined primary
@@ -77,59 +79,80 @@ described by the [CloudEvent Avro Schema](cloudevents.avsc):
 
 ```json
 {
-  "namespace": "io.cloudevents",
+  "namespace": "io.cloudevents.v1.avro",
   "type": "record",
   "name": "CloudEvent",
   "version": "1.0",
   "doc": "Avro Event Format for CloudEvents",
   "fields": [
     {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "source",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "datacontenttype",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "dataschema",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "subject",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "time",
+      "type": [
+        "null",
+        {
+            "type": "long",
+            "logicalType": "timestamp-millis"
+        }
+      ],
+      "default": null
+    },
+    {
       "name": "attribute",
       "type": {
         "type": "map",
-        "values": ["null", "boolean", "int", "string", "bytes"]
-      }
+        "values": [
+          "null",
+          "boolean",
+          "int",
+          "string",
+          "bytes"
+        ]
+      },
+        "default": {}
     },
     {
       "name": "data",
       "type": [
         "bytes",
-        "null",
-        "boolean",
-        {
-          "type": "map",
-          "values": [
-            "null",
-            "boolean",
-            {
-              "type": "record",
-              "name": "CloudEventData",
-              "doc": "Representation of a JSON Value",
-              "fields": [
-                {
-                  "name": "value",
-                  "type": {
-                    "type": "map",
-                    "values": [
-                      "null",
-                      "boolean",
-                      { "type": "map", "values": "CloudEventData" },
-                      { "type": "array", "items": "CloudEventData" },
-                      "double",
-                      "string"
-                    ]
-                  }
-                }
-              ]
-            },
-            "double",
-            "string"
-          ]
-        },
-        { "type": "array", "items": "CloudEventData" },
-        "double",
-        "string"
-      ]
+        "null"
+      ],
+      "default": "null"
     }
   ]
 }
@@ -144,10 +167,6 @@ sequences or by consulting the `datacontenttype` attribute.
 If the implementation determines that the type of the data is binary, the value
 MUST be stored in the `data` field using the `bytes` type.
 
-For other types (non-binary data without a `datacontenttype` attribute), the
-implementation MUST translate the data value into a representation of the JSON
-value using the union types described for the `data` record.
-
 ## 4 Examples
 
 The following table shows exemplary mappings:
@@ -155,16 +174,14 @@ The following table shows exemplary mappings:
 | CloudEvents | Type   | Exemplary Avro Value                           |
 | ----------- | ------ | ---------------------------------------------- |
 | type        | string | `"com.example.someevent"`                      |
-| specversion | string | `"1.0"`                                        |
 | source      | string | `"/mycontext"`                                 |
 | id          | string | `"7a0dc520-c870-4193c8"`                       |
-| time        | string | `"2019-06-05T23:45:00Z"`                       |
+| time        | log.   | `1234`                                         |
 | dataschema  | string | `"http://registry.com/schema/v1/much.json"`    |
 | contenttype | string | `"application/json"`                           |
 | data        | bytes  | `"{"much":{"wow":"json"}}"`                    |
-|             |        |                                                |
 | dataschema  | string | `"http://registry.com/subjects/ce/versions/1"` |
-| contenttype | string | `"application/avro"`                           |
+| contenttype | string | `"application/avro"`.                          |
 | data        | bytes  | `[avro-serialized-bytes]`                      |
 
 ## References
