@@ -182,7 +182,7 @@ The following table shows exemplary mappings:
 | contenttype | string | `"application/json"`                           |
 | data        | bytes  | `"{"much":{"wow":"json"}}"`                    |
 | dataschema  | string | `"http://registry.com/subjects/ce/versions/1"` |
-| contenttype | string | `"application/avro"`.                          |
+| contenttype | string | `"application/avro"`                           |
 | data        | bytes  | `[avro-serialized-bytes]`                      |
 
 ## References
