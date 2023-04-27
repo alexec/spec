@@ -9,6 +9,7 @@ This differs from the [Avro format](avro-formad.md) in that:
 
 - It is optimized for performance, preferring a more compact representation.
 - Only supports spec version 1.0 (any changes to spec version, requires changes to Avro schema, which changes the finger-print).
+- Does not natively support JSON (JSON can be straight-forwardly serialized to bytes and this was therefore not considered neccessary).
 
 ## Table of Contents
 
