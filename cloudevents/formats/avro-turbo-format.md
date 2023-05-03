@@ -148,7 +148,7 @@ described by the [CloudEvent Avro Schema](cloudevents.avsc):
           "bytes"
         ]
       },
-        "default": {}
+      "default": {}
     },
     {
       "name": "data",
