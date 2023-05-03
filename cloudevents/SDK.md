@@ -173,6 +173,7 @@ Undo it when done:
 | [CloudEvents Core](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md)                                                       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:    | :heavy_check_mark:  | :heavy_check_mark:  |
 | Event Formats |
 | [Avro](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md)                                                    | :heavy_check_mark: |     | :x:  | :x: |     |     |        |      | :x:  |
+| [Avro Turbo](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-turbo-format.md)                                                    | :x: |     | :x:  | :x: |     |     |        |      | :x:  |
 | [JSON](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md)                                                    | :heavy_check_mark: |     | :heavy_check_mark:  | :heavy_check_mark: |     |     | :heavy_check_mark:    |      | :heavy_check_mark:  |
 | [Protobuf ](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md)                                           | :heavy_check_mark: |     | :heavy_check_mark:  | :x: |     |     |        |      | :x:  |
 | Bindings / Content Modes |
