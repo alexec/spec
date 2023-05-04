@@ -5,7 +5,7 @@
 The Avro Turbo Format for CloudEvents defines how events attributes are expressed in
 the [Avro 1.9.0 Specification][avro-spec].
 
-This differs from the [Avro format](avro-formad.md) in that:
+This differs from the [Avro format](avro-format.md) in that:
 
 - It is optimized for performance, preferring a more compact representation.
 - Only supports spec version 1.0 (any changes to spec version, requires 
@@ -19,7 +19,8 @@ This differs from the [Avro format](avro-formad.md) in that:
 1. [Introduction](#1-introduction)
 2. [Attributes](#2-attributes)
 3. [Data](#3-data)
-4. [Examples](#4-examples)
+4. [Transport](#4-transport)
+5. [Examples](#5-examples)
 
 ## 1. Introduction
 
@@ -82,7 +83,7 @@ Example:
 ### 2.4 Definition
 
 Users of Avro MUST use a message whose binary encoding is identical to the one
-described by the [CloudEvent Avro Schema](cloudevents.avsc):
+described by the [CloudEvent Avro Turbo Schema](cloudevents-turbo.avsc):
 
 ```json
 {
@@ -133,8 +134,8 @@ described by the [CloudEvent Avro Schema](cloudevents.avsc):
       "type": [
         "null",
         {
-            "type": "long",
-            "logicalType": "timestamp-millis"
+          "type": "long",
+          "logicalType": "timestamp-millis"
         }
       ],
       "default": null
@@ -147,6 +148,10 @@ described by the [CloudEvent Avro Schema](cloudevents.avsc):
           "null",
           "boolean",
           "int",
+          {
+            "type": "long",
+            "logicalType": "timestamp-millis"
+          },
           "string",
           "bytes"
         ]
@@ -171,10 +176,15 @@ Before encoding, the AVRO serializer MUST first determine the runtime data type
 of the content. This can be determined by examining the data for invalid UTF-8
 sequences or by consulting the `datacontenttype` attribute.
 
-If the implementation determines that the type of the data is binary, the value
-MUST be stored in the `data` field using the `bytes` type.
+## 4 Transport
 
-## 4 Examples
+Transports that support content identification MUST use the following designation:
+
+```text
+ application/cloudevents+avro-turbo
+```
+
+## 5 Examples
 
 The following table shows exemplary mappings:
 

@@ -10,7 +10,8 @@ the [Avro 1.9.0 Specification][avro-spec].
 1. [Introduction](#1-introduction)
 2. [Attributes](#2-attributes)
 3. [Data](#3-data)
-4. [Examples](#4-examples)
+4. [Transport](#4-transport)
+5. [Examples](#5-examples)
 
 ## 1. Introduction
 
@@ -148,7 +149,15 @@ For other types (non-binary data without a `datacontenttype` attribute), the
 implementation MUST translate the data value into a representation of the JSON
 value using the union types described for the `data` record.
 
-## 4 Examples
+## 4 Transport
+
+Transports that support content identification MUST use the following designation:
+
+```text
+ application/cloudevents+avro
+```
+
+## 5 Examples
 
 The following table shows exemplary mappings:
 
