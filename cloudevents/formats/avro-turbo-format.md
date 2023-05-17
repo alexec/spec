@@ -8,9 +8,8 @@ the [Avro 1.9.0 Specification][avro-spec].
 This differs from the [Avro format](avro-format.md) in that:
 
 - It is optimized for performance, preferring a more compact representation.
-- Only supports spec version 1.0 (any changes to spec version, requires 
-  changes to Avro schema, which changes the finger-print, 
-  breaking compatibility).
+- It only supports spec version 1.0 (any changes to spec version requires changes to the Avro schema,
+  which changes the fingerprint, breaking compatibility).
 - Does not natively support JSON (JSON can be straight-forwardly serialized 
   to bytes and this was therefore not considered neccessary).
 
