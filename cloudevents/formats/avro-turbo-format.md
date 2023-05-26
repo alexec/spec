@@ -60,113 +60,16 @@ The CloudEvents type system MUST be mapped to Avro types as follows.
 | Binary        | [bytes][avro-primitives]                                               |
 | URI           | [string][avro-primitives] following [RFC 3986 §4.3][rfc3986-section43] |
 | URI-reference | [string][avro-primitives] following [RFC 3986 §4.1][rfc3986-section41] |
-| Timestamp     | [long][avro-primitives]                                                |
+| Timestamp     | [long][avro-primitives]  using `timestamp-micros` logical type         |
 
 Extension specifications MAY define secondary mapping rules for the values of
 attributes they define, but MUST also include the previously defined primary
 mapping.
 
-### 2.2 OPTIONAL Attributes
-
-CloudEvents Spec defines OPTIONAL attributes. The Avro format defines that these
-fields MUST use the `null` type and the actual type through the
-[union][avro-unions].
-
-Example:
-
-```json
-["null", "string"]
-```
-
-### 2.3 Definition
+### 2.2 Definition
 
 Users of Avro MUST use a message whose binary encoding is identical to the one
-described by the [CloudEvent Avro Turbo Schema](cloudevents-turbo.avsc):
-
-```json
-{
-  "namespace": "io.cloudevents.v1.avro",
-  "type": "record",
-  "name": "CloudEvent",
-  "version": "1.0",
-  "doc": "Avro Turbo Event Format for CloudEvents",
-  "fields": [
-    {
-      "name": "id",
-      "type": "string"
-    },
-    {
-      "name": "source",
-      "type": "string"
-    },
-    {
-      "name": "type",
-      "type": "string"
-    },
-    {
-      "name": "datacontenttype",
-      "type": [
-        "null",
-        "string"
-      ],
-      "default": null
-    },
-    {
-      "name": "dataschema",
-      "type": [
-        "null",
-        "string"
-      ],
-      "default": null
-    },
-    {
-      "name": "subject",
-      "type": [
-        "null",
-        "string"
-      ],
-      "default": null
-    },
-    {
-      "name": "time",
-      "type": [
-        "null",
-        {
-          "type": "long",
-          "logicalType": "timestamp-millis"
-        }
-      ],
-      "default": null
-    },
-    {
-      "name": "attribute",
-      "type": {
-        "type": "map",
-        "values": [
-          "null",
-          "boolean",
-          "int",
-          {
-            "type": "long",
-            "logicalType": "timestamp-millis"
-          },
-          "string",
-          "bytes"
-        ]
-      },
-      "default": {}
-    },
-    {
-      "name": "data",
-      "type": [
-        "bytes",
-        "null"
-      ],
-      "default": "null"
-    }
-  ]
-}
-```
+described by the [CloudEvent Avro Turbo Schema](cloudevents-turbo.avsc).
 
 ## 3 Transport
 

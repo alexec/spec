@@ -62,7 +62,7 @@
           "int",
           {
             "type": "long",
-            "logicalType": "timestamp-millis"
+            "logicalType": "timestamp-micros"
           },
           "string",
           "bytes"
