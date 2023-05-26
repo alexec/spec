@@ -58,7 +58,7 @@ Extension specifications MAY define secondary mapping rules for the values of
 attributes they define, but MUST also include the previously defined primary
 mapping.
 
-### 2.2 OPTIONAL Attributes
+### 2.3 OPTIONAL Attributes
 
 CloudEvents Spec defines OPTIONAL attributes. The Avro format defines that these
 fields MUST use the `null` type and the actual type through the
@@ -70,7 +70,7 @@ Example:
 ["null", "string"]
 ```
 
-### 2.3 Definition
+### 2.4 Definition
 
 Users of Avro MUST use a message whose binary encoding is identical to the one
 described by the [CloudEvent Avro Schema](cloudevents.avsc):
