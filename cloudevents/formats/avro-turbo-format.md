@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The Avro Turbo Format for CloudEvents defines how events attributes are expressed in
+The Avro Turbo Format for CloudEvents defines how events are expressed in
 the [Avro 1.9.0 Specification][avro-spec].
 
 This differs from the [Avro format](avro-format.md) in that:
@@ -25,8 +25,7 @@ This differs from the [Avro format](avro-format.md) in that:
 
 [CloudEvents][ce] is a standardized and protocol-agnostic definition of the
 structure and metadata description of events. This specification defines how the
-elements defined in the CloudEvents specification are to be represented in the
-[Avro 1.9.0][avro-primitives].
+CloudEvents are to be represented as [Avro 1.9.0][avro-primitives].
 
 The [Attributes](#2-attributes) section describes the naming conventions and
 data type mappings for CloudEvents attributes for use as Avro message
@@ -54,7 +53,7 @@ type-system. This specification explicitly maps each attribute.
 The CloudEvents type system MUST be mapped to Avro types as follows.
 
 | CloudEvents   | Avro                                                                   |
-| ------------- | ---------------------------------------------------------------------- |
+|---------------|------------------------------------------------------------------------|
 | Boolean       | [boolean][avro-primitives]                                             |
 | Integer       | [int][avro-primitives]                                                 |
 | String        | [string][avro-primitives]                                              |
@@ -169,37 +168,29 @@ described by the [CloudEvent Avro Turbo Schema](cloudevents-turbo.avsc):
 }
 ```
 
-## 3 Data
-
-Before encoding, the AVRO serializer MUST first determine the runtime data type
-of the content. This can be determined by examining the data for invalid UTF-8
-sequences or by consulting the `datacontenttype` attribute.
-
-## 4 Transport
+## 3 Transport
 
 Transports that support content identification MUST use the following designation:
 
 ```text
- application/cloudevents+avro-turbo
+application/cloudevents+avro-turbo
 ```
 
-## 5 Examples
+## 4 Examples
 
 The following table shows exemplary mappings:
 
-| CloudEvents | Type   | Exemplary Avro Value                           |
-| ----------- | ------ | ---------------------------------------------- |
-| type        | string | `"com.example.someevent"`                      |
-| specversion | N/A    | Spec version is always `1.0`.                  |
-| source      | string | `"/mycontext"`                                 |
-| id          | string | `"7a0dc520-c870-4193c8"`                       |
-| time        | long   | `1234`                                         |
-| dataschema  | string | `"http://registry.com/schema/v1/much.json"`    |
-| contenttype | string | `"application/json"`                           |
-| data        | bytes  | `"{"much":{"wow":"json"}}"`                    |
-| dataschema  | string | `"http://registry.com/subjects/ce/versions/1"` |
-| contenttype | string | `"application/avro"`                           |
-| data        | bytes  | `[avro-serialized-bytes]`                      |
+| CloudEvents     | Type   | Exemplary Avro Value                      |
+|-----------------|--------|-------------------------------------------|
+| id              | string | `7a0dc520-c870-4193c8`                    |
+| source          | string | `https://github.com/cloudevents`          |
+| specversion     | N/A    | Spec version is always `1.0`.             |
+| type            | string | `com.example.object.deleted.v2`           |
+| datacontenttype | string | `application/octet-stream`                |
+| dataschema      | string | `http://registry.com/schema/v1/much.json` |
+| subject         | string | `mynewfile.jpg`                           |
+| time            | long   | `1685121689691`                           |
+| data            | bytes  | `[bytes]`                                 |
 
 ## References
 

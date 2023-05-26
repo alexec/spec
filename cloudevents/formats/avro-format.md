@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The Avro Format for CloudEvents defines how events attributes are expressed in
+The Avro Format for CloudEvents defines how events are expressed in
 the [Avro 1.9.0 Specification][avro-spec].
 
 ## Table of Contents
@@ -17,8 +17,7 @@ the [Avro 1.9.0 Specification][avro-spec].
 
 [CloudEvents][ce] is a standardized and protocol-agnostic definition of the
 structure and metadata description of events. This specification defines how the
-elements defined in the CloudEvents specification are to be represented in the
-[Avro 1.9.0][avro-primitives].
+CloudEvents are to be represented as [Avro 1.9.0][avro-primitives].
 
 The [Attributes](#2-attributes) section describes the naming conventions and
 data type mappings for CloudEvents attributes for use as Avro message
@@ -46,7 +45,7 @@ type-system. This specification explicitly maps each attribute.
 The CloudEvents type system MUST be mapped to Avro types as follows.
 
 | CloudEvents   | Avro                                                                   |
-| ------------- | ---------------------------------------------------------------------- |
+|---------------|------------------------------------------------------------------------|
 | Boolean       | [boolean][avro-primitives]                                             |
 | Integer       | [int][avro-primitives]                                                 |
 | String        | [string][avro-primitives]                                              |
@@ -59,7 +58,7 @@ Extension specifications MAY define secondary mapping rules for the values of
 attributes they define, but MUST also include the previously defined primary
 mapping.
 
-### 2.3 OPTIONAL Attributes
+### 2.2 OPTIONAL Attributes
 
 CloudEvents Spec defines OPTIONAL attributes. The Avro format defines that these
 fields MUST use the `null` type and the actual type through the
@@ -71,7 +70,7 @@ Example:
 ["null", "string"]
 ```
 
-### 2.4 Definition
+### 2.3 Definition
 
 Users of Avro MUST use a message whose binary encoding is identical to the one
 described by the [CloudEvent Avro Schema](cloudevents.avsc):
@@ -154,27 +153,24 @@ value using the union types described for the `data` record.
 Transports that support content identification MUST use the following designation:
 
 ```text
- application/cloudevents+avro
+application/cloudevents+avro
 ```
 
 ## 5 Examples
 
 The following table shows exemplary mappings:
 
-| CloudEvents | Type   | Exemplary Avro Value                           |
-| ----------- | ------ | ---------------------------------------------- |
-| type        | string | `"com.example.someevent"`                      |
-| specversion | string | `"1.0"`                                        |
-| source      | string | `"/mycontext"`                                 |
-| id          | string | `"7a0dc520-c870-4193c8"`                       |
-| time        | string | `"2019-06-05T23:45:00Z"`                       |
-| dataschema  | string | `"http://registry.com/schema/v1/much.json"`    |
-| contenttype | string | `"application/json"`                           |
-| data        | bytes  | `"{"much":{"wow":"json"}}"`                    |
-|             |        |                                                |
-| dataschema  | string | `"http://registry.com/subjects/ce/versions/1"` |
-| contenttype | string | `"application/avro"`                           |
-| data        | bytes  | `[avro-serialized-bytes]`                      |
+| CloudEvents     | Type   | Exemplary Avro Value                      |
+|-----------------|--------|-------------------------------------------|
+| id              | string | `7a0dc520-c870-4193c8`                    |
+| source          | string | `https://github.com/cloudevents`          |
+| specversion     | N/A    | Spec version is always `1.0`.             |
+| type            | string | `com.example.object.deleted.v2`           |
+| datacontenttype | string | `application/octet-stream`                |
+| dataschema      | string | `http://registry.com/schema/v1/much.json` |
+| subject         | string | `mynewfile.jpg`                           |
+| time            | long   | `1685121689691`                           |
+| data            | bytes  | `[bytes]`                                 |
 
 ## References
 
